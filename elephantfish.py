@@ -425,13 +425,20 @@ def main():
 
         # We query the user until she enters a (pseudo) legal move.
         move = None
+        flag = None
         while move not in hist[-1].gen_moves():
-            match = re.match('([a-i][0-9])'*2, input('Your move: '))
+            inputs = input('Your move: ')
+            match = re.match('([a-i][0-9])'*2, inputs)
             if match:
                 move = parse(match.group(1)), parse(match.group(2))
+            elif inputs == 'exit':   # Optional, it could be other string
+                flag = True
+                break
             else:
                 # Inform the user when invalid input (e.g. "help") is entered
                 print("Please enter a move like h2e2")
+        if flage :
+            break
         hist.append(hist[-1].move(move))
 
         # After our move we rotate the board and print it again.
